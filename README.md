@@ -1,61 +1,39 @@
 # react-native-inviewport
-Detect if component is in device viewport.
-I based this off: https://github.com/joshwnj/react-visibility-sensor with some slight modifications.
+It detects if the component is visible within device viewport. Performance wise notice there is a watch checking every 100ms
+
+Originally based off: https://github.com/joshwnj/react-visibility-sensor with some fixes
 
 <H2>Install</H2>
 
-```sudo npm react-native-inviewport@latest --save```
+```npm install react-native-inviewport@latest --save```
 
 <H2>Example Usage</H2>
 
 Assuming you already setup your component, here's a quick example.
 
 ```
-checkVisible(isVisible){
-    if(isVisible){
-      if(!this.state.visible){
-        this.setState({visible: true});
-      }
-    }else{
-      if(this.state.visible){
-        this.setState({visible: false});
-      }
-    }
-}
+  onViewPortToggle(isVisible){
+     this.setState({ isVisible })
+     console.log('My children are rendering while %s', isVisible ? 'visible' : 'hidden')
+  }
 
 render() {
   return (
-  <ScrollView style={{flex: 1}}>
-    <InViewPort onChange={this.checkVisible}>
-      <View style={{flex: 1, height: 200, backgroundColor: 'blue'}}>
-        <Text style={{color: 'white'}}>View is visible? {this.state.visible}</Text>
-      </View>
-    </InViewPort>
+  <View style={{flex: 1, height: 200}}>
+      <ScrollView style={{flex: 1}}>
+        <InViewPort onChange={this.onViewPortToggle}>
+          <View style={{flex: 1, height: 200, backgroundColor: 'blue'}}>
+            <Text>I am hidden sometimes</Text>
+          </View>
+        </InViewPort>
 
-    <InViewPort onChange={this.checkVisible}>
-      <View style={{flex: 1, height: 200, backgroundColor: 'green'}}>
-        <Text style={{color: 'white'}}>View is visible? {this.state.visible}</Text>
-      </View>
-    </InViewPort>
+          <View style={{flex: 1, height: 400, backgroundColor: 'green'}}>
+            <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</Text>
+          </View>
+      </ScrollView>
 
-    <InViewPort onChange={this.checkVisible}>
-      <View style={{flex: 1, height: 200, backgroundColor: 'red'}}>
-        <Text style={{color: 'white'}}>View is visible? {this.state.visible}</Text>
-      </View>
-    </InViewPort>
-
-    <InViewPort onChange={this.checkVisible}>
-      <View style={{flex: 1, height: 200, backgroundColor: 'orange'}}>
-        <Text style={{color: 'white'}}>View is visible? {this.state.visible}</Text>
-      </View>
-    </InViewPort>
-
-    <InViewPort onChange={this.checkVisible}>
-      <View style={{flex: 1, height: 200}}>
-        <Text>View is visible? {this.state.visible}</Text>
-      </View>
-    </InViewPort>
-  </ScrollView>
+      <Text>{ 'My scrolled component is' + (this.state.isVisible ? 'visible' : 'hidden')}</Text>
+  </View>
   );
 }
 ```
