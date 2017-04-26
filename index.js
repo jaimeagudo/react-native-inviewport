@@ -37,11 +37,13 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps: function (nextProps) {
-    if (nextProps.active) {
-      this.lastValue = null;
-      this.startWatching();
-    } else {
-      this.stopWatching();
+    if(nextProps.active != this.props.active){
+      if (nextProps.active) {
+        this.lastValue = null;
+        this.startWatching();
+      } else {
+        this.stopWatching();
+      }
     }
   },
 
