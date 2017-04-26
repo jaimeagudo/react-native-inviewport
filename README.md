@@ -5,7 +5,7 @@ Originally based off: https://github.com/joshwnj/react-visibility-sensor with so
 
 <H2>Install</H2>
 
-```~~npm install react-native-inviewport@latest --save~~```
+~~npm install react-native-inviewport@latest --save~~
 
 Copy index.js to your project for now, the npm is obsolte
 
